@@ -1,32 +1,50 @@
 # python3
 
 def read_input():
-    # this function needs to aquire input both from keyboard and file
-    # as before, use capital i (input from keyboard) and capital f (input from file) to choose which input type will follow
-    
-    
-    # after input type choice
-    # read two lines 
-    # first line is pattern 
-    # second line is text in which to look for pattern 
-    
-    # return both lines in one return
-    
-    # this is the sample return, notice the rstrip function
-    return (input().rstrip(), input().rstrip())
+   
+
+    input_type = input()
+
+    if 'I' in input_type:
+        pattern = input().rstrip()
+        text = input().rstrip()
+
+    elif 'F' in input_type:
+        filename = "struktura"
+
+        with open("tests/" + filename, 'a') as f:
+            pattern = f.readline().rstrip()
+            text = f.readline().rstrip()
+
+    return (pattern, text)
+
 
 def print_occurrences(output):
-    # this function should control output, it doesn't need any return
     print(' '.join(map(str, output)))
 
 def get_occurrences(pattern, text):
-    # this function should find the occurances using Rabin Karp alghoritm 
 
-    # and return an iterable variable
-    return [0]
+    p = len(pattern)
+    t = len(text)
+    p = hash(pattern)
+    t = hash(text[:p_l])
 
 
-# this part launches the functions
+    positions = []
+
+
+    for i in range(t - p + 1):
+        if p == t and pattern == text[i:i+p_l]:
+
+            positions.append(i)
+
+        if i < t - p:
+            t = hash(text[i+1:i+p_l+1])
+
+
+    return positions
+
 if __name__ == '__main__':
     print_occurrences(get_occurrences(*read_input()))
+
 
